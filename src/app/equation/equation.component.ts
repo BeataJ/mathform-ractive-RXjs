@@ -30,9 +30,11 @@ export class EquationComponent implements OnInit {
         return;
       }
 
-      this.mathForm.controls.a.setValue(this.randomNumber());
-      this.mathForm.controls.b.setValue(this.randomNumber());
-      this.mathForm.controls.answer.setValue('');
+      this.mathForm.setValue({
+        a: this.randomNumber(),
+        b: this.randomNumber(),
+        answer: ''
+      })
     });
   }
 
