@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { delay, filter } from 'rxjs/operators'
+import { delay, filter, scan } from 'rxjs/operators'
 import { MathValidators } from '../math-validators';
 
 @Component({
@@ -27,14 +27,16 @@ export class EquationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const startTime = new Date();
-    let numberSolved = 0;
-
     this.mathForm.statusChanges.pipe(
       filter(value => value === 'VALID'),
-      delay(300)
-    ).subscribe(() => {
-      numberSolved++
+      delay(300),
+      scan((acc, value) => {
+        return {
+          numberSolved: acc.numberSolved + 1,
+          startTime: acc.startTime
+        }
+      }, { numberSolved: 0, startTime: new Date() })
+    ).subscribe(({ numberSolved, startTime }) => {
       this.secondsPerSolution = (
         new Date().getTime() - startTime.getTime()
       ) / numberSolved / 1000;
