@@ -6,8 +6,9 @@ form {
 }
 
 input {
+    font-size: 96px;
     border: none;
-    border-bottom: 1px soild black;
+    border-bottom: 1px solid black;
     width: 20%;
     text-align: center;
 }
