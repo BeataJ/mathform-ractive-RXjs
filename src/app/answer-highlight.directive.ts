@@ -6,6 +6,15 @@ import { NgControl } from '@angular/forms';
 })
 export class AnswerHighlightDirective {
 
-  constructor() { }
+  constructor(private el: ElementRef, private controlName: NgControl) { 
+    
+  }
+
+  ngOnInit() {
+    this.controlName.control.parent.valueChanges
+    .subscribe((value) => {
+      console.log(value)
+    })
+  }
 
 }
