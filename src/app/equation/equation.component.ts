@@ -9,6 +9,7 @@ import { MathValidators } from '../math-validators';
   styleUrls: ['./equation.component.css']
 })
 export class EquationComponent implements OnInit {
+  secondsPerSolution = 0;
   mathForm = new FormGroup({
     a: new FormControl(this.randomNumber()),
     b: new FormControl(this.randomNumber()),
