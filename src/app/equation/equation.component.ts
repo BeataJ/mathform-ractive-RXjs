@@ -27,10 +27,18 @@ export class EquationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const startTime = new Date();
+    let numberSolved = 0;
+
     this.mathForm.statusChanges.pipe(
       filter(value => value === 'VALID'),
       delay(300)
     ).subscribe(() => {
+      numberSolved++
+      this.secondsPerSolution = (
+        new Date().getTime() - startTime.getTime()
+      ) / numberSolved / 1000;
+
       this.mathForm.setValue({
         a: this.randomNumber(),
         b: this.randomNumber(),
